@@ -11,7 +11,7 @@ spec:
     path: apps/nginx/overlays/staging
   destination:
     server: https://kubernetes.default.svc
-    namespace: staging
+    namespace: staging-1
   syncPolicy:
     automated:
       prune: true
