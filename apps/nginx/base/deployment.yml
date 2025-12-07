@@ -16,6 +16,6 @@ spec:
         - name: ghcr-secret
       containers:
         - name: nginx
-          image: 
+image: 
           ports:
             - containerPort: 80
