@@ -12,6 +12,8 @@ spec:
       labels:
         app: nginx
     spec:
+      imagePullSecrets:
+        - name: ghcr-secret
       containers:
         - name: nginx
           image: ghcr.io/yatishg17/argo2/nginx:latest
