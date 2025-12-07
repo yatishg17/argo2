@@ -1,4 +1,7 @@
 resources:
   - ../../base
-patchesStrategicMerge:
-  - patch-replicas.yml
+patches:
+  - path: patch-replicas.yml
+    target:
+      kind: Deployment
+      name: nginx
