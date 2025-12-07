@@ -43,8 +43,9 @@ jobs:
 
       - name: Update image tag in base deployment
         run: |
-          sed -i "s|image: .*|image: ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}|" apps/nginx/base/deployment.yml
+          sed -i "s|image: ghcr.io.*/nginx:.*|image: $IMAGE|" apps/nginx/base/deployment.yml
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git commit -am "Update image to $IMAGE" || echo "No changes to commit"
+          git add apps/nginx/base/deployment.yml
+          git diff --cached --quiet || git commit -m "Update image to $IMAGE"
           git push origin dev
