@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: ghcr.io/yatishg17/argo2/nginx:latest
           ports:
             - containerPort: 80
