@@ -7,6 +7,9 @@ on:
 
 jobs:
   build-and-push:
+    permissions:
+      contents: write
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -27,6 +30,9 @@ jobs:
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
   update-manifests:
+    permissions:
+      contents: write
+      packages: write
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:

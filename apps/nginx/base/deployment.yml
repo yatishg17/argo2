@@ -16,6 +16,6 @@ spec:
         - name: ghcr-secret
       containers:
         - name: nginx
-          image: ghcr.io/yatishg17/argo2/nginx:latest
+          image: ghcr.io/yatishg17/argo2/nginx:${{ github.sha }}
           ports:
             - containerPort: 80
