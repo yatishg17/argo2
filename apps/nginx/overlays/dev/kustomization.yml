@@ -7,4 +7,4 @@ patches:
       name: nginx
 images:
   - name: ghcr.io/yatishg17/argo2/nginx
-    newTag: 4c8284cbc989c23878de6e9c3cf8d5cc32172262
+    newTag: 4d7ffd666557d27ab4154dd1a3083360f0ea40c3
