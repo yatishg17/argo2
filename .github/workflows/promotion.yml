@@ -44,6 +44,19 @@ jobs:
             git commit -m "Update image to $IMAGE"
             git push origin dev
           fi
+      - name: Install validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y yamllint
+          sudo snap install kustomize
+
+      - name: Validate YAML and Kustomize build
+        run: |
+          echo "Validating YAML syntax..."
+          yamllint -d "{extends: relaxed, rules: {line-length: disable}}" apps/
+
+          echo "Validating Kustomize build..."
+          kustomize build apps/nginx/overlays/dev > /dev/null
 
   promote-to-staging:
     permissions:
