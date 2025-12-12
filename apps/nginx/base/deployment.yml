@@ -16,6 +16,6 @@ spec:
         - name: ghcr-secret
       containers:
         - name: nginx
-image: ghcr.io/yatishg17/argo2/nginx:dc61abf92eb794044774ef6b6f48bf0a76be8105
+          image: ghcr.io/yatishg17/argo2/nginx:dc61abf92eb794044774ef6b6f48bf0a76be8105
           ports:
             - containerPort: 80
