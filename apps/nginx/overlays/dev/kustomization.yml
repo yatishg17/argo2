@@ -4,4 +4,4 @@ patchesStrategicMerge:
   - patch-replicas.yml
 images:
   - name: ghcr.io/yatishg17/argo2/nginx
-    newTag: 32cd46fc29bf6dd579206e3bcd0dcee3a49cc2f4
+    newTag: 5e0f632420d44a9f7658ea07a7f016236b53c46d
