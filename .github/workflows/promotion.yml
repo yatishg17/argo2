@@ -23,11 +23,11 @@ jobs:
       - name: Install PyYAML
         run: pip install pyyaml
 
-      - name: Update image tag in base
+      - name: Update image tag in dev overlay
         run: |
           IMAGE_TAG=${{ github.sha }}
           
-          # Update dev overlay
+          # Only update the newTag in kustomization.yml
           sed -i "s/newTag: .*/newTag: ${IMAGE_TAG}/" apps/nginx/overlays/dev/kustomization.yml
           
           git config user.name "github-actions"
