@@ -20,6 +20,9 @@ jobs:
           ref: dev
           fetch-depth: 0
 
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: Update image tag in base
         run: |
           IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
@@ -27,9 +30,9 @@ jobs:
           import yaml
           with open('apps/nginx/base/deployment.yml', 'r') as f:
               data = yaml.safe_load(f)
-          data['spec']['template']['spec']['containers'][0]['image'] = '${{ env.IMAGE }}'
+          data['spec']['template']['spec']['containers'][0]['image'] = """${{ env.IMAGE }}"""
           with open('apps/nginx/base/deployment.yml', 'w') as f:
-              yaml.dump(data, f, default_flow_style=False, sort_keys=False)
+              yaml.dump(data, f, default_flow_style=False, sort_keys=False, allow_unicode=True, width=50)
           EOF
           
           git config user.name "github-actions"
@@ -42,8 +45,6 @@ jobs:
             git commit -m "Update image to $IMAGE"
             git push origin dev
           fi
-      - name: Install PyYAML
-        run: pip install pyyaml
       - name: Install validation tools
         run: |
           sudo apt-get update
