@@ -28,9 +28,8 @@ jobs:
       - name: Update image tag in base
         run: |
           IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
-
-          # Use printf to ensure proper YAML formatting
-          yq '.spec.template.spec.containers[0].image = strenv(IMAGE)' apps/nginx/base/deployment.yml > deployment.tmp && mv deployment.tmp apps/nginx/base/deployment.yml
+          yq -P '.spec.template.spec.containers[0].image = strenv(IMAGE)' apps/nginx/base/deployment.yml > deployment.tmp
+          mv deployment.tmp apps/nginx/base/deployment.yml
           
           git config user.name "github-actions"
           git config user.email "actions@github.com"
