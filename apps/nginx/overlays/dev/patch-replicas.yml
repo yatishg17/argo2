@@ -5,8 +5,6 @@ metadata:
   namespace: dev-1
 spec:
   replicas: 1
-images:
-  - name: ghcr.io/yatishg17/argo2/nginx
-    newTag: placeholder
+
 
   

@@ -5,3 +5,6 @@ patches:
     target:
       kind: Deployment
       name: nginx
+images:
+  - name: ghcr.io/yatishg17/argo2/nginx
+    newTag: placeholder
