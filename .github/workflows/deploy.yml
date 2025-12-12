@@ -27,7 +27,6 @@ jobs:
           IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
           docker build -t "$IMAGE" .
           docker push "$IMAGE"
-          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
   update-manifests:
     permissions:
@@ -41,18 +40,18 @@ jobs:
         with:
           ref: dev
 
-      - name: Update image tag in base deployment
+      - name: Update image tag in dev kustomization
         run: |
-          sed -i "s|^ *image:.*|image: $IMAGE|" apps/nginx/base/deployment.yml
+          IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
+          sed -i "s/newTag: .*/newTag: ${{ github.sha }}/" apps/nginx/overlays/dev/kustomization.yml
 
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-
-          git add apps/nginx/base/deployment.yml
+          git add apps/nginx/overlays/dev/kustomization.yml
 
           if git diff --cached --quiet; then
             echo "No changes detected; skipping commit."
           else
-            git commit -m "Update image to $IMAGE"
+            git commit -m "Update nginx image tag to ${{ github.sha }}"
             git push origin dev
           fi
