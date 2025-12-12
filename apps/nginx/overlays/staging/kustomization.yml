@@ -1,10 +1,7 @@
 resources:
   - ../../base
-patches:
-  - path: patch-replicas.yml
-    target:
-      kind: Deployment
-      name: nginx
+patchesStrategicMerge:
+  - patch-replicas.yml
 images:
   - name: ghcr.io/yatishg17/argo2/nginx
     newTag: latest
