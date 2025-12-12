@@ -29,15 +29,13 @@ jobs:
         run: |
           IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
 
-          # YAML-safe image update
-          yq e ".spec.template.spec.containers[0].image = strenv(IMAGE)" -i apps/nginx/base/deployment.yml
-
+          # YAML-safe image update with proper indentation
+          yq e '.spec.template.spec.containers[0].image = strenv(IMAGE)' -i apps/nginx/base/deployment.yml
+          
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-
           git add apps/nginx/base/deployment.yml
 
-          # Commit only if there is a real change
           if git diff --cached --quiet; then
             echo "No changes detected; skipping commit."
           else
