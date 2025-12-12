@@ -43,11 +43,8 @@ jobs:
 
       - name: Update image tag in dev kustomization (preserve indentation)
         run: |
-          IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
           IMAGE_TAG=${{ github.sha }}
-
-          # preserve leading whitespace on the newTag line
-          sed -E -i 's/^([[:space:]]*newTag:).*/\1 '"${IMAGE_TAG}"'/' apps/nginx/overlays/dev/kustomization.yml
+          sed -E -i "s/^([[:space:]]*newTag:).*/\1 ${IMAGE_TAG}/" apps/nginx/overlays/dev/kustomization.yml
 
           git config user.name "github-actions"
           git config user.email "actions@github.com"
