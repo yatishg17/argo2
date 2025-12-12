@@ -29,8 +29,8 @@ jobs:
         run: |
           IMAGE=ghcr.io/${{ github.repository }}/nginx:${{ github.sha }}
 
-          # YAML-safe image update with proper indentation
-          yq e '.spec.template.spec.containers[0].image = strenv(IMAGE)' -i apps/nginx/base/deployment.yml
+          # Use printf to ensure proper YAML formatting
+          yq '.spec.template.spec.containers[0].image = strenv(IMAGE)' apps/nginx/base/deployment.yml > deployment.tmp && mv deployment.tmp apps/nginx/base/deployment.yml
           
           git config user.name "github-actions"
           git config user.email "actions@github.com"
